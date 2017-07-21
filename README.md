@@ -137,26 +137,38 @@ server.close();
 ##### 4.1. url 속성을 사용한 페이지 구분
 
 ```javascript
-// 1. import modules
-var http = require('http');
-// 1.1 this is the fileSystem moduel.
-var fs = require('fs');
-var url = require('url');
+exports.parser = function(request, response){
+    console.log('in router.js parser');
+    // url parsing
+    var path = splitQueryString(request.url);
+    /* 현업에서는 "/"를 기준으로 url을 전부 split 처리하여 배열에 담아서 쓴다. */
+    // 1. url을 분석
+    if(path == '/bbs'){
+        // bbs.js 처리
+        parseMethod(bbs, request, response);
+    } else if(path == '/user'){
+        // user.js 처리
+         parseMethod(user, request, response);
+    } else {
+        error.send(response, 404);
+}};
 
-// 2. making web server & starting it
-http.createServer(function(request, response){
-  // 2.1 declaring variable
-  var pathname = url.parse(request.url).pathname;
-  
-  // 2.1 distinguishing page
-  if(pathname == '/'){
-    
-  } else if(pathname == '/OtherPage'){
-    
-  }).listen(5773, function(){
-    console.log('server is running @ http://127.0.0.1:5773');
-  });
-}
+// method parsing
+function parseMethod(obj, request, response){
+    console.log('in router.js parseMethod');
+    if(request.method == "POST"){
+        obj.write(request, response);
+
+    } else if(request.method == "GET"){
+         obj.read(response);
+
+    } else if(request.method == "DELETE"){
+        obj.remove(response);
+
+    } else if(request.method == "PUT"){
+         obj.update(response);
+    }
+};
 
 
 ```
