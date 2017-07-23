@@ -1,7 +1,7 @@
-
 var error = require("../error");
 var bbs = require("../bbs");
 var user = require("../user");
+
 // request를 분석해서 요청 url에 대한 연결
 /* http://localhost/bbs <- 목록 */
 /* http://localhost/bbs (method : POST) <- 목록 */
