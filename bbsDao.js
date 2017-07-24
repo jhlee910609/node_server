@@ -1,9 +1,11 @@
 var database = require('./module/database/');
 var tableName = "board";
 
-exports.select = function(){
+exports.select = function(callback){
     console.log('in bbsDao.js : select');
-    var query = "select * from " + table + "  ";
+    var query = " select * from " + tableName + "";
+    var data = "";
+    database.executeQuery(query, callback);
 }
 
 exports.insert = function(data, callback){
@@ -12,19 +14,26 @@ exports.insert = function(data, callback){
     var query = " insert into" +  " " + tableName + "(title, content, author, `date`)";
         // 아래 쿼리문 데이터 대량 인서트 할 수 있도록 만들어짐 .. 
     query = query +  " VALUES ?";
-    var values = [
-          [data.title, data.content, data.author, data.data]
-    ];
-    database.executeMulti(query, values, function(){
-        console.log('in bbsDao.js : executeMulti');
-        callback();
+
+    var values = [data.title, data.content, data.author, data.data];
+    database.executeMulti(query, values, callback);
+}
+
+exports.update = function(data, callback){
+    var query = " update " + tableName 
+              + " set title   =?, " 
+              + "     content =?, "
+              + "     author  =?, "
+              + "     date    =?  "
+              + " where id=?"; 
+    // -----------------------
+    var now = new Date().toLocaleDateString();
+    var values = [data.title, data.content, data.author, now, data.id];
+    database.execute(query, values, function(error){
+        callback(error);
     });
 }
 
-exports.update = function(){
-    var query = "update" + tableName + "  ";
-}
-
 exports.delete = function(){
-    var query = "delete from" + tableName + "  ";
+    var query = "delete from " + tableName + "  ";
 }

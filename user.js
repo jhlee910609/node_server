@@ -1,21 +1,21 @@
 exports.write = function(response){
-    send(response, 'write');
+    this.send(response, 'write');
 };
 
 exports.update = function(response){
-    send(response, 'update');
+    this.send(response, 'update');
 
 };
 
 exports.delete = function(response){
-    send(response, 'remove');
+    this.send(response, 'remove');
 };
 
 exports.read = function(response){
-    send(response, 'read');
+    this.send(response, 'read');
 };
 
-send = function(response, msg){
+exports.send = function(response, msg){
     response.writeHead(200, {'Content-Type' : 'text/html'});
     response.end(msg);
 }

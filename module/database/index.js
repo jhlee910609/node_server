@@ -9,25 +9,27 @@ var conInfo = {
 
 // 쿼리 후에 결과값을 리턴해주는 함수 
 exports.executeQuery = function(query, callback){
+	console.log('database index.js : executeQuery');
 	var con = mysql.createConnection(conInfo);
 	con.connect();
 	con.query(query, function(err, items, fields){
 		if(err){
 			console.log("Error Message = " + err);
 		} else {
-            callback(items);
+			console.log('database index.js : executeQuery22222');
+        	callback(items);
 		}
 		this.end(); // <- 필수 안하면 계속 스트림이 흐르는 상태, 연결해제 하는 역할 
 	});
 };
 
-// 쿼리를 싱행만 하는 함수 
-exports.execute = function(query, callback){
+// 쿼리를 실행만 하는 함수 
+exports.execute = function(query, values, callback){
 	var con = mysql.createConnection(conInfo);
 	con.connect();
-	con.query(query, function(err, items, fields){
+	con.query(query, values ,function(err, items, fields){
 		if(err){
-			console.log("Error Message = " + err);
+			callback(err);
 		} else {
             callback();
 		}
@@ -39,7 +41,7 @@ exports.executeMulti = function(query, values, callback){
 	console.log('in database/index.js : executeMulti');
 	var con = mysql.createConnection(conInfo);
 	con.connect();
-	con.query(query, [values], function(err, items, fields){
+	con.query(query, [[values]], function(err, items, fields){
 		if(err){
 			console.log("Error Message = " + err);
 		} else {

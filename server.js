@@ -7,7 +7,7 @@ var router = require('./module/router');
 var server = http.createServer(function(request, response){
     // request <- node.js가 사용자 요청정보를 담아서 넘겨준다.
     // request <- node.js가 사용자에게 응답할 때 사용하라고 알아서 넘겨준다.
-    console.log('in server.js');
+    console.log('in server.js : createServer');
     router.parser(request, response);
 });
 
