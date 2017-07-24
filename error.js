@@ -1,10 +1,9 @@
-// 객체 만들어서 사용 
-
 exports.send = function(response, code, err){
     response.writeHead(code, {'Content-Type' : 'application/json'});
     if(code == 300){
-        // 웹브라우저일 경우만 처리하면 될듯...
+        // 웹브라우저 사용 시에만 처리하면 된다.
     } else if(code == 404){
+        // 에러 객체를 만들어서 사용하는 방법이 편하다. 
         var errorObj = {
              result : "404 Page not found",
              msg : "",
@@ -14,7 +13,7 @@ exports.send = function(response, code, err){
     } else if(code == 500){
         var errorObj = {
              result : "500 Page not found",
-             msg : "",
+             msg : err,
         }
         response.end(JSON.stringify(errorObj));
     }

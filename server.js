@@ -16,36 +16,3 @@ var server = http.createServer(function(request, response){
 server.listen(1111, function(){
     console.log("server's running...."); 
 });
-
-
-
-
-
-
-
-
-
-
-
-// =====================================================================
-// // 응답처리
-// function sendResponse(response){
-//    response.writeHead(200, {'Content-Type' : 'text/html'});
-//     for(i=0; i<10 ; i++){
-//         response.write(i + "</br>");
-//     }
-//     response.end("Hello~~");
-//     console.log("response completed!!!");
-// };
-
-// function send404(response){
-//     response.writeHead(404, {'Content-Type' : 'text/html'});
-//     response.end("<h1> 404 page not found </h1>")
-// }
-
-
-
-
-
-
-

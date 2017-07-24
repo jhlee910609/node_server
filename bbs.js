@@ -27,6 +27,7 @@ exports.read = function(qs, response){
          });
     } else { // 검색을 위한 쿼리스트링이 있다면 쿼리스트링을 분해해서 처리한다.
             var parsedQs = queryString.parse(qs, '&', '=');
+            // ===== parse하게 되면 아래와 같은 js 객체가 만들어진다..
             // parsedQs = {
             //     title : "this is title.",
             //     author : "JunHee",
@@ -40,7 +41,6 @@ exports.read = function(qs, response){
 };
 
 // update는 write와 동작 방식이 유사하다. 
-// 업데이터는 write와 동작방식이 유사하다
 exports.update = function(request, response){
     // 요청한 데이터를 담을 변수를 선언
     var postdata = "";
@@ -49,6 +49,7 @@ exports.update = function(request, response){
     });
     request.on('end', function(){ // 데이터를 다 읽었을 때 호출
         var dataObj = JSON.parse(postdata);
+        // 아래와 같은 형식의 js 객체를 생성해준다.
         // dataObj = {
         //     id : 10,
         //     title : "수정된 제목",

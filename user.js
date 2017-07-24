@@ -4,7 +4,6 @@ exports.write = function(response){
 
 exports.update = function(response){
     this.send(response, 'update');
-
 };
 
 exports.delete = function(response){
