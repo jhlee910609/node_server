@@ -1,10 +1,16 @@
 var database = require('./module/database/');
 var tableName = "board";
 
+exports.search = function(qs, callback){
+    var query = "select * from "+tableName+" where title like '%"+qs.title+"%' ";
+    console.log(query);
+    database.executeQuery(query, callback);
+
+}
+
 exports.select = function(callback){
     console.log('in bbsDao.js : select');
     var query = " select * from " + tableName + "";
-    var data = "";
     database.executeQuery(query, callback);
 }
 
@@ -34,6 +40,10 @@ exports.update = function(data, callback){
     });
 }
 
-exports.delete = function(){
-    var query = "delete from " + tableName + "  ";
+exports.delete = function(data, callback){
+    var query = "delete from " + tableName + " where id = ? ";
+    var values = data.id;
+    database.execute(query, values, function(error){
+        callback(error);
+    });
 }

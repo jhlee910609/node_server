@@ -27,7 +27,7 @@ exports.executeQuery = function(query, callback){
 exports.execute = function(query, values, callback){
 	var con = mysql.createConnection(conInfo);
 	con.connect();
-	con.query(query, values ,function(err, items, fields){
+	con.query(query, values ,function(err, result){
 		if(err){
 			callback(err);
 		} else {

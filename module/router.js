@@ -8,7 +8,7 @@ var user = require("../user");
 // url 분석
 exports.parser = function(request, response){
     console.log('in router.js : parser');
-    var path = splitQueryString(request.url);
+    var path = removeQueryString(request.url);
     /* 실제로는 "/"를 기준으로 url을 전부 split 처리하여 배열에 담아서 쓴다. */
     // 1. url을 분석
     if(path == '/bbs'){
@@ -27,10 +27,10 @@ function parseMethod(obj, request, response){
         obj.write(request, response);
 
     } else if(request.method == "GET"){
-         obj.read(request, response);
+         obj.read(getQueryString(request.url), response);
 
     } else if(request.method == "DELETE"){
-        obj.delete(response);
+        obj.delete(request, response);
 
     } else if(request.method == "PUT"){
         console.log('in router : update');
@@ -39,7 +39,7 @@ function parseMethod(obj, request, response){
 };
 
 // [ http://localhost/bbs  ] <- url     [ ?title=서초 ] <- queryString
-function splitQueryString(fullUrl){
+function removeQueryString(fullUrl){
     console.log('in router.js splitQueryString');
     var position = fullUrl.indexOf('?');
     if(position == -1){
@@ -48,3 +48,14 @@ function splitQueryString(fullUrl){
         return fullUrl.substring(0, position);
     }
 };
+
+function getQueryString(fullUrl){
+    console.log('in router.js getQueryString');
+    var position = fullUrl.indexOf('?');
+    if(position == -1){
+        return "";
+    } else {
+        return fullUrl.substring(position + 1);
+    }
+};
+
