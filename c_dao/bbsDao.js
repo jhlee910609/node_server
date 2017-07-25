@@ -1,4 +1,4 @@
-var database = require('./module/database/');
+var database = require('../module/database/');
 var tableName = "board";
 
 exports.search = function(qs, callback){
@@ -21,7 +21,6 @@ exports.insert = function(data, callback){
     query = query +  " VALUES ?";
     var values = [data.title, data.content, data.author, data.data];
     database.executeMulti(query, values, callback);
-    data.kk;
 }
 
 exports.update = function(data, callback){

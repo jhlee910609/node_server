@@ -1,6 +1,6 @@
 // 1. 서버모듈
 var http = require('http');
-var router = require('./module/router');
+var router = require('./a_router/router');
 
 // 2. 서버 생성
                                  // 콜백 function <- 사용자 요청이 있을 때, 호출된다.

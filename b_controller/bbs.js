@@ -1,5 +1,5 @@
-var dao = require("./bbsDao");
-var error = require('./error.js');
+var dao = require("../c_dao/bbsDao");
+var error = require('../error.js');
 var queryString = require("querystring");
 
 exports.write = function(request, response){
