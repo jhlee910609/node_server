@@ -16,7 +16,7 @@ exports.write = function(request, response){
         });
     });
 };
-
+ 
 exports.read = function(qs, response){
     if(qs == ""){
         console.log("in bbs.js : read");
