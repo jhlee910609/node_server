@@ -37,7 +37,7 @@ exports.execute = function(query, values, callback){
 		this.end();  
 	});
 };
-// 여러 인자르 랍는 쿼리문 ㄴ
+// 여러 인자를 받는 쿼리문 
 exports.executeMulti = function(query, values, callback){
 	console.log('database/index.js :::: executeMulti');
 	var con = mysql.createConnection(conInfo);
