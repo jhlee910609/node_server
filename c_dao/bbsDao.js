@@ -1,12 +1,15 @@
 var database = require('../module/database/');
 var tableName = "board";
 
+exports.getLastItem = function(callback){
+    var query = "select * from " + tableName + " order by id desc limit 1";
+    database.executeQuery(query, callback);
+}
+
 exports.select = function(callback){
     console.log('in bbsDao.js : select');
     var query = " select * from " + tableName + " order by id desc " ;
     database.executeQuery(query, callback);
-
-
 }
 // 문제가 있다... ㅠㅠㅠ
 exports.search = function(qs, callback){

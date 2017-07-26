@@ -15,7 +15,7 @@ exports.parser = function(request, response){
         // bbs.js 처리
         parseMethod(bbs, request, response);
     } else if(path == '/user'){
-         parseMethod(user, request, response);
+        parseMethod(user, request, response);
     } else {
         error.send(response, 404);
 }};
@@ -27,7 +27,8 @@ function parseMethod(module, request, response){
         module.write(request, response);
 
     } else if(request.method == "GET"){
-         module.read(getQueryString(request.url), response);
+        console.log('in bbsDao.js :::: parseMethod [ ' + getQueryString(request.url) +" ]");
+        module.read(getQueryString(request.url), response);
 
     } else if(request.method == "DELETE"){
         module.delete(request, response);

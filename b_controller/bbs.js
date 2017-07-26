@@ -6,10 +6,15 @@ exports.read = function(qs, response){
     if(qs == ""){
         console.log("in bbs.js : read");
         dao.select(function(data){ // dao를 통해 db를 읽고난 후, 결과셋을 처리하는 코드
-            console.log("in bbs.js : response.on('end')");
             var jsonString = JSON.stringify(data);
             send(response, jsonString);
          });
+    } else if(qs == "getLast") {
+        dao.getLastItem(function(data){
+            var jsonString = JSON.stringify(data);
+            console.log("in bbs.js :: getLastItem == " + jsonString);
+            send(response, jsonString);
+        });
     } else { // 검색을 위한 쿼리스트링이 있다면 쿼리스트링을 분해해서 처리한다.
             var parsedQs = queryString.parse(qs, '&', '=');
             // ===== parse하게 되면 아래와 같은 js 객체가 만들어진다..
@@ -88,7 +93,7 @@ exports.delete = function(request, response){
 };
 
 send = function(response, result){
-    response.writeHead(200, {'Content-Type' : 'application/json;charset=utf-8'});
+    response.writeHead(200, {'Content-Type' : 'application/json'});
     response.end(result);
-    console.log('in bbsDao.js : complete!!!');
+    console.log('===================== in bbsDao.js : complete!!!');
 };

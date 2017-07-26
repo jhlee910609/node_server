@@ -17,7 +17,7 @@ exports.executeQuery = function(query, callback){
 		if(err){
 			console.log("Error Message = " + err);
 		} else {
-			console.log('database index.js :::: executeQuery22222');
+			console.log('database index.js :::: executeQuery item' + items);
         	callback(items);
 		}
 		this.end(); // <- 필수 호출하지 않으면 계속 스트림이 흐르는 상태, 연결해제 하는 역할 
@@ -26,12 +26,10 @@ exports.executeQuery = function(query, callback){
 
 // 검색 조건을 알아서 처리해주는 함수 
 exports.executeQueryValues = function(query, values, callback){
-	console.log("in index.js :::: executeQueryValues");
 	var con = mysql.createConnection(conInfo);
 	con.connect();
-	console.log('index.js ::: executeQueryValues query :' + query);
 	con.query(query, values, function(err, items, fields){ // 데이터베이스에 쿼리 실행
-		console.log("in database :::: executeQueryValues");
+		console.log("in database :::: executeQueryValues [ " +  query + " ]");
 		if(err){
 			console.log(err);
 		}else{
