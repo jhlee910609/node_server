@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "response": "^0.18.0"
+    "response": "^0.18.0",
+    "supervision": "0.0.2"
   }
 }

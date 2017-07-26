@@ -21,20 +21,20 @@ exports.parser = function(request, response){
 }};
 
 // http 메소드 파싱
-function parseMethod(obj, request, response){
+function parseMethod(module, request, response){
     console.log('in router.js parseMethod');
     if(request.method == "POST"){
-        obj.write(request, response);
+        module.write(request, response);
 
     } else if(request.method == "GET"){
-         obj.read(getQueryString(request.url), response);
+         module.read(getQueryString(request.url), response);
 
     } else if(request.method == "DELETE"){
-        obj.delete(request, response);
+        module.delete(request, response);
 
     } else if(request.method == "PUT"){
         console.log('in router : update');
-         obj.update(request, response);
+         module.update(request, response);
     }
 };
 

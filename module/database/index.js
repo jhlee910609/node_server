@@ -13,6 +13,7 @@ exports.executeQuery = function(query, callback){
 	var con = mysql.createConnection(conInfo);
 	con.connect();
 	con.query(query, function(err, items, fields){
+			console.log('database/index.js :::: executeQuery query');
 		if(err){
 			console.log("Error Message = " + err);
 		} else {
@@ -23,12 +24,33 @@ exports.executeQuery = function(query, callback){
 	});
 };
 
+// 검색 조건을 알아서 처리해주는 함수 
+exports.executeQueryValues = function(query, values, callback){
+	console.log("in index.js :::: executeQueryValues");
+	var con = mysql.createConnection(conInfo);
+	con.connect();
+	console.log('index.js ::: executeQueryValues query :' + query);
+	con.query(query, values, function(err, items, fields){ // 데이터베이스에 쿼리 실행
+		console.log("in database :::: executeQueryValues");
+		if(err){
+			console.log(err);
+		}else{
+			console.log('executeQueryValues ::: callback()');
+			console.log(items);
+			callback(items);
+		}
+		this.end();  // mysql 연결 해제
+	});
+}
+
+
 // 쿼리를 실행만 하는 함수 
 exports.execute = function(query, values, callback){
 	console.log('database/index.js :::: executeQuery');
 	var con = mysql.createConnection(conInfo);
 	con.connect();
 	con.query(query, values ,function(err, result){
+		console.log("in database :::: execute query");
 		if(err){
 			callback(err); // <- 에러가 발생하면 callback에 에러를 넘겨준다.
 		} else {
@@ -42,7 +64,8 @@ exports.executeMulti = function(query, values, callback){
 	console.log('database/index.js :::: executeMulti');
 	var con = mysql.createConnection(conInfo);
 	con.connect();
-	con.query(query, [[values]], function(err, items, fields){
+	con.query(query, [[values]], function(err, result){ // 데이터베이스에 쿼리 실행 
+		console.log("in database :::: executeMulti query");
 		if(err){
 			console.log("Error Message = " + err);
 		} else {
