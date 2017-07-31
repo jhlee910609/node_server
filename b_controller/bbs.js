@@ -3,12 +3,14 @@ var error = require('../error.js');
 var queryString = require("querystring");
 
 exports.read = function(qs, response){
+    console.log("in bbs.js :: " +  qs);
     if(qs == ""){
         console.log("in bbs.js : read");
         dao.select(function(data){ // dao를 통해 db를 읽고난 후, 결과셋을 처리하는 코드
             var jsonString = JSON.stringify(data);
             send(response, jsonString);
          });
+        // 명령어에 메소드 명이 이렇게 들어가도 되는지...rest api에 맞춰 해야될 것 같은딩
     } else if(qs == "getLast") {
         dao.getLastItem(function(data){
             var jsonString = JSON.stringify(data);

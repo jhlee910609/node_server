@@ -26,7 +26,7 @@ exports.insert = function(data, callback){
     // 쿼리는 붙혀 쓸 경우, 에러가 발생할 확률이 높기 때문에 최초 한 칸을 띄워준다...
     var query = " insert into " + tableName + "(title, content, author, date)";
     // 아래 쿼리문은 데이터 대량 인서트 할 수 있도록 만들어짐 .. 
-    query = query +  " values(?,?,?,?)";
+    query = query +  ;
     var values = [data.title, data.content, data.author, data.data];
     database.execute(query, values, callback);
 }

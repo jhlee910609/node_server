@@ -17,7 +17,7 @@ exports.executeQuery = function(query, callback){
 		if(err){
 			console.log("Error Message = " + err);
 		} else {
-			console.log('database index.js :::: executeQuery item' + items);
+			console.log('database index.js :::: executeQuery item');
         	callback(items);
 		}
 		this.end(); // <- 필수 호출하지 않으면 계속 스트림이 흐르는 상태, 연결해제 하는 역할 

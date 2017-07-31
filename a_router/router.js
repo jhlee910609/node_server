@@ -9,11 +9,13 @@ var user = require("../b_controller/user");
 exports.parser = function(request, response){
     console.log('in router.js : parser');
     var path = removeQueryString(request.url);
+    console.log('in router.js : path' + path);
     /* 실제로는 "/"를 기준으로 url을 전부 split 처리하여 배열에 담아서 쓴다. */
     // 1. url을 분석
     if(path == '/bbs'){
         // bbs.js 처리
         parseMethod(bbs, request, response);
+        
     } else if(path == '/user'){
         parseMethod(user, request, response);
     } else {
